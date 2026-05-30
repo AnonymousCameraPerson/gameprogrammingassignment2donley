@@ -28,56 +28,19 @@ bool logic::set_o(int x, int y)
 }
 void logic::done(bool& tie, bool& xwon, bool& owon)
 {
-	if ((board[0][0] == 'x') && (board[0][1] == 'x') && (board[0][2] == 'x') ||
-		(board[0][0] == 'x') && (board[1][0] == 'x') && (board[2][0] == 'x') ||
-		(board[0][0] == 'x') && (board[1][1] == 'x') && (board[2][2] == 'x') ||
-		(board[0][1] == 'x') && (board[1][1] == 'x') && (board[2][1] == 'x') ||
-		(board[1][0] == 'x') && (board[1][1] == 'x') && (board[1][2] == 'x') ||
-		(board[2][0] == 'x') && (board[2][1] == 'x') && (board[2][2] == 'x') ||
-		(board[0][2] == 'x') && (board[1][2] == 'x') && (board[2][2] == 'x') ||
-		(board[2][0] == 'x') && (board[1][1] == 'x') && (board[0][2] == 'x'))
-	{
-		xwon = true;
-		tie = false;
-		owon = false;
-	}
-	else if ((board[0][0] == 'o') && (board[0][1] == 'o') && (board[0][2] == 'o') ||
-		(board[0][0] == 'o') && (board[1][0] == 'o') && (board[2][0] == 'o') ||
-		(board[0][0] == 'o') && (board[1][1] == 'o') && (board[2][2] == 'o') ||
-		(board[0][1] == 'o') && (board[1][1] == 'o') && (board[2][1] == 'o') ||
-		(board[1][0] == 'o') && (board[1][1] == 'o') && (board[1][2] == 'o') ||
-		(board[2][0] == 'o') && (board[2][1] == 'o') && (board[2][2] == 'o') ||
-		(board[0][2] == 'o') && (board[1][2] == 'o') && (board[2][2] == 'o') ||
-		(board[2][0] == 'o') && (board[1][1] == 'o') && (board[0][2] == 'o'))
-	{
-		xwon = false;
-		tie = false;
-		owon = true;
-	}
-	else
-	{
-		int ncount = 0;
-		for (int i = 0; i < 5; i++)
-		{
-			for (int j = 0; j < 5; j++)
-			{
-				if (board[i][j] == 'n')
-					ncount++;
-			}
-		}
-		if (ncount == 0)
-		{
-			xwon = false;
-			tie = true;
-			owon = false;
-		}
-		else
-		{
-			xwon = false;
-			owon = false;
-			tie = false;
-		}
-	}
+	//if //cards match
+	//{
+	//	xwon = true;
+	//	tie = false;
+	//	owon = false;
+	//}
+	//else if //(cards don't match)
+	//{
+	//	xwon = false;
+	//	tie = false;
+	//	owon = true;
+	//}
+	
 }
 
 

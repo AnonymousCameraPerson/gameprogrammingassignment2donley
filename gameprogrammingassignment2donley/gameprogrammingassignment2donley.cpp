@@ -1,8 +1,5 @@
 // Lucia Donley
-//
-
 #include <iostream>
-
 #include <allegro5\allegro.h>
 #include <allegro5\allegro_font.h>
 #include <allegro5\allegro_ttf.h>
@@ -24,7 +21,7 @@
 void draw_grid(); //draws 5x5 grid
 void draw_status(); //draws the bottom right hand square and status info
 //box ? ? get_mouse_input();
-void draw_objects(int x, int y); //x and y are center of box
+//void draw_objects(int x, int y); //x and y are center of box
 
 
 
@@ -151,14 +148,55 @@ void draw_status() {
 }
 void draw_x(int x, int y)
 {
-	al_draw_line(x - 106, y - 62, x + 106, y + 62, al_map_rgb(255, 0, 0), 2);
-	al_draw_line(x - 106, y + 62, x + 106, y - 62, al_map_rgb(255, 0, 0), 2);
+	al_draw_pieslice(x - 20, y - 20, 10, 90, 10, al_map_rgb(200, 0, 0), 4);
+	al_draw_line(x - 20, y - 20, x + 20, y + 20, al_map_rgb(255, 255, 0), 2);
 }
 void draw_o(int x, int y)
 {
-	al_draw_circle(x, y, 62, al_map_rgb(255, 255, 0), 4);
+	al_draw_rectangle(x - 20, y - 20, x + 20, y + 20, al_map_rgb(255, 0, 0), 4);
+	al_draw_filled_rectangle(x - 10, y - 10, x + 10, y + 10, al_map_rgb(50, 200, 80));
+}
+
+
+void draw_objects(int x, int y) {
+	int random = rand() % 2;
+	
+	switch (random)
+	{
+		case 0:
+			al_draw_filled_triangle(x-20, y-20, x+20, y+20, x, y, al_map_rgb(200, 0, 0));
+		case 1:
+			al_draw_filled_rectangle(x - 20, y - 20, x + 20, y + 20, al_map_rgb(255, 0, 0));
+		case 2:
+			al_draw_circle(x, y, 20, al_map_rgb(255, 255, 0), 4);
+		case 3:
+			al_draw_line(x - 20, y - 20, x + 20, y + 20, al_map_rgb(255, 0, 0), 2);
+			al_draw_line(x - 20, y + 20, x + 20, y - 20, al_map_rgb(255, 0, 0), 2);
+		case 4:
+			al_draw_filled_rectangle(x - 20, y - 20, x + 20, y + 20, al_map_rgb(0, 255, 0));
+			al_draw_line(x - 20, y - 20, x + 20, y + 20, al_map_rgb(255, 255, 0), 2);
+		case 5:
+			al_draw_filled_rectangle(x - 20, y - 20, x + 20, y + 20, al_map_rgb(255, 0, 255));
+			al_draw_circle(x, y, 20, al_map_rgb(255, 155, 0), 4);
+		case 6:
+			al_draw_line(x - 20, y + 20, x + 20, y - 20, al_map_rgb(255, 255, 0), 2);
+			al_draw_circle(x, y, 20, al_map_rgb(255, 255, 0), 4);
+		case 7:
+			al_draw_pieslice(x - 20, y - 20, 10 ,90, 10, al_map_rgb(200, 0, 0), 4);
+			al_draw_line(x - 20, y - 20, x + 20, y + 20, al_map_rgb(255, 255, 0), 2);
+		case 8:
+			al_draw_rectangle(x - 20, y - 20, x + 20, y + 20, al_map_rgb(255, 0, 0), 4);
+			al_draw_filled_rectangle(x - 10, y - 10, x + 10, y + 10, al_map_rgb(50, 200, 80));
+		//case 9:
+		//case 10:
+		//case 11:
+		//case 12:
+
+	}
 
 }
+
+
 void turn_xo(int x, int y, int& turn, int boardx, int boardy, logic& game_logic)
 {
 	ALLEGRO_FONT* font = al_load_font("college.ttf", 24, 0);
