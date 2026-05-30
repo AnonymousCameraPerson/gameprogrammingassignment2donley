@@ -148,13 +148,11 @@ void draw_status() {
 }
 void draw_x(int x, int y)
 {
-	al_draw_pieslice(x - 20, y - 20, 10, 90, 10, al_map_rgb(200, 0, 0), 4);
-	al_draw_line(x - 20, y - 20, x + 20, y + 20, al_map_rgb(255, 255, 0), 2);
+	al_draw_pieslice(x, y, 30, 90, 30, al_map_rgb(50, 223, 0), 4);
 }
 void draw_o(int x, int y)
 {
-	al_draw_rectangle(x - 20, y - 20, x + 20, y + 20, al_map_rgb(255, 0, 0), 4);
-	al_draw_filled_rectangle(x - 10, y - 10, x + 10, y + 10, al_map_rgb(50, 200, 80));
+	al_draw_rounded_rectangle(x - 20, y - 20, x + 20, y + 20, 5, 5, al_map_rgb(255, 0, 0), 4);
 }
 
 
@@ -187,10 +185,17 @@ void draw_objects(int x, int y) {
 		case 8:
 			al_draw_rectangle(x - 20, y - 20, x + 20, y + 20, al_map_rgb(255, 0, 0), 4);
 			al_draw_filled_rectangle(x - 10, y - 10, x + 10, y + 10, al_map_rgb(50, 200, 80));
-		//case 9:
-		//case 10:
-		//case 11:
-		//case 12:
+		case 9:
+			al_draw_line(x, y - 20, x, y + 20, al_map_rgb(255, 0, 0), 2);
+			al_draw_circle(x, y, 20, al_map_rgb(100, 100, 80), 4);
+			al_draw_circle(x, y, 40, al_map_rgb(0, 200, 0), 4);
+		case 10:
+			al_draw_pieslice(x, y, 30, 90, 30, al_map_rgb(50, 223, 0), 4);
+		case 11:
+			al_draw_ellipse(x, y, 20, 10, al_map_rgb(255, 0, 0), 4);
+			al_draw_circle(x, y, 20, al_map_rgb(255, 255, 0), 4);
+		case 12:
+			al_draw_rounded_rectangle(x - 20, y - 20, x + 20, y + 20, 5, 5, al_map_rgb(255, 0, 0), 4);
 
 	}
 
