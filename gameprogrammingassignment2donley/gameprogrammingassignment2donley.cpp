@@ -182,47 +182,26 @@ void turn_xo(int x, int y, int& turn, int boardx, int boardy, logic& game_logic)
 void set_graphics_x_o(int x, int y, logic& game_logic)
 {
 	static int turn = 0;
-	if ((x < 213) && (y < 125))
+	if ((x < 180) && (y < 160))
 	{
-		turn_xo(106, 62, turn, 0, 0, game_logic);
-	}
-	else if ((x > 360) && (x < 540 && (y < 125)))
-	{
-		turn_xo(319, 62, turn, 0, 1, game_logic);
-	}
-	else if ((x > 540) && (y < 125))
-	{
-		turn_xo(533, 62, turn, 0, 2, game_logic);
-	}
-	//else if ((x < 213) && (y > 125) && (y < 250))
-	//{
-	//	turn_xo(106, 186, turn, 1, 0, game_logic);
 
-	//}
-	//else if ((x > 213) && (x < 426) && (y > 125) && (y < 250))
-	//{
-	//	turn_xo(319, 186, turn, 1, 1, game_logic);
-	//}
-	//else if ((x > 426) && (y > 125) && (y < 250))
-	//{
-	//	turn_xo(533, 186, turn, 1, 2, game_logic);
-	//}
-	//else if ((x < 213) && (y > 250) && (y < 375))
-	//{
-	//	turn_xo(106, 314, turn, 2, 0, game_logic);
-
-	//}
-	//else if ((x > 213) && (x < 426) && (y > 250) && (y < 375))
-	//{
-	//	turn_xo(319, 314, turn, 2, 1, game_logic);
-	//}
-	//else if ((x > 426) && (y > 250) && (y < 375))
-	//{
-	//	turn_xo(533, 314, turn, 2, 2, game_logic);
-	//}
-	else {
-		turn_xo(533, 314, turn, 2, 2, game_logic);
+		turn_xo(80, 80, turn, 0, 0, game_logic);
 	}
+	else if ((x < 360) && (x>180) && (y < 160))
+	{
+		turn_xo(270, 80, turn, 0, 1, game_logic);
+	}
+	else if ((x < 540) && (x > 360) && (y < 160))
+	{
+		turn_xo(450, 80, turn, 0, 2, game_logic);
+	}
+	else if ((x < 720) && (x>540) && (y<160)){
+		turn_xo(630, 80, turn, 0, 3, game_logic);
+	}
+	else if ((x < 900) && (x > 720) && (y < 160)) {
+		turn_xo(820, 80, turn, 0, 4, game_logic);
+	}
+
 }
 
 void game_message(bool& gameover, logic& game_logic)
