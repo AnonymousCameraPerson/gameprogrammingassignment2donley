@@ -3,8 +3,8 @@
 
 void logic::setup()
 {
-	for (int i = 0; i < 3; i++)
-		for (int j = 0; j < 3; j++)
+	for (int i = 0; i < 5; i++)
+		for (int j = 0; j < 5; j++)
 			board[i][j] = 'n';
 }
 bool logic::set_x(int x, int y)
@@ -57,9 +57,9 @@ void logic::done(bool& tie, bool& xwon, bool& owon)
 	else
 	{
 		int ncount = 0;
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < 5; i++)
 		{
-			for (int j = 0; j < 3; j++)
+			for (int j = 0; j < 5; j++)
 			{
 				if (board[i][j] == 'n')
 					ncount++;
