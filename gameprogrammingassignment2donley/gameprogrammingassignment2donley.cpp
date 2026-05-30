@@ -202,7 +202,7 @@ void game_message(bool& gameover, logic& game_logic)
 {
 	bool xwon = false, owon = false, tie = false;
 	game_logic.done(tie, xwon, owon);
-	ALLEGRO_FONT* font = al_load_font("GROBOLD.ttf", 24, 0);
+	ALLEGRO_FONT* font = al_load_font("college.ttf", 24, 0);
 
 	if (tie == true)
 	{
