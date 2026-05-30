@@ -19,15 +19,21 @@
 //bool checkGuess() //compares the guess and pattern.
 //void resetGame() //reset / clear the game.
 //void random_create(int imgToGenerate) //given the number of images needing to be generated.The objects will be randomly generated and randomly placed in the grid.
+//get_mouse_input() //get mouse input
+//following funtions I added
+void draw_grid(); //draws 5x5 grid
+void draw_status(); //draws the bottom right hand square and status info
+//box ? ? get_mouse_input();
+void draw_objects(int x, int y); //x and y are center of box
+
+
 
 //Only global variables I can have are
 int mx;
 int my;
 
 void set_graphics_x_o(int x, int y, logic& game_logic);
-void draw_board();
-void draw_x(int x, int y);
-void draw_o(int x, int y);
+
 void game_message(bool& gameover, logic& game_logic);
 void turn_xo(int x, int y, int& turn, int boardx, int boardy, logic& game_logic);
 
@@ -76,7 +82,8 @@ int main(void)
 	al_register_event_source(event_queue, al_get_mouse_event_source());
 
 	game_logic.setup();
-	draw_board();
+	draw_grid();
+	draw_status();
 	//game_message(gameover, game_logic);
 
 	al_flip_display();
@@ -98,7 +105,8 @@ int main(void)
 				draw = true;
 			}
 		}
-		draw_board();
+		draw_grid();
+		draw_status();
 		game_message(gameover, game_logic);
 		if (draw)
 		{
@@ -117,7 +125,7 @@ int main(void)
 }
 
 
-void draw_board()
+void draw_grid()
 {
 	//al_draw_line(0, 375, 640, 375, al_map_rgb(255, 0, 0), 2);
 	al_draw_filled_rectangle(900, 0, 1366, 768, al_map_rgb(200, 100, 50));
@@ -133,10 +141,13 @@ void draw_board()
 	al_draw_line(0, 160, 900, 160, al_map_rgb(255, 255, 255), 2);
 	al_draw_line(0, 320, 900, 320, al_map_rgb(255, 255, 255), 2);
 	al_draw_line(0, 480, 900, 480, al_map_rgb(255, 255, 255), 2);
-	al_draw_line(0, 640, 900, 640, al_map_rgb(255, 255, 255), 2);
-	
+	al_draw_line(0, 640, 900, 640, al_map_rgb(255, 255, 255), 2);	
 
+}
 
+void draw_status() {
+	//draw bottom right hand square
+	al_draw_filled_rectangle(900, 500, 1366, 768, al_map_rgb(0, 100, 50));
 }
 void draw_x(int x, int y)
 {
@@ -150,7 +161,7 @@ void draw_o(int x, int y)
 }
 void turn_xo(int x, int y, int& turn, int boardx, int boardy, logic& game_logic)
 {
-	ALLEGRO_FONT* font = al_load_font("GROBOLD.ttf", 24, 0);
+	ALLEGRO_FONT* font = al_load_font("college.ttf", 24, 0);
 	if (turn == 0)
 	{
 		if (game_logic.set_x(boardx, boardy) == true)
@@ -175,38 +186,41 @@ void set_graphics_x_o(int x, int y, logic& game_logic)
 	{
 		turn_xo(106, 62, turn, 0, 0, game_logic);
 	}
-	else if ((x > 213) && (x < 426) && (y < 125))
+	else if ((x > 360) && (x < 540 && (y < 125)))
 	{
 		turn_xo(319, 62, turn, 0, 1, game_logic);
 	}
-	else if ((x > 426) && (y < 125))
+	else if ((x > 540) && (y < 125))
 	{
 		turn_xo(533, 62, turn, 0, 2, game_logic);
 	}
-	else if ((x < 213) && (y > 125) && (y < 250))
-	{
-		turn_xo(106, 186, turn, 1, 0, game_logic);
+	//else if ((x < 213) && (y > 125) && (y < 250))
+	//{
+	//	turn_xo(106, 186, turn, 1, 0, game_logic);
 
-	}
-	else if ((x > 213) && (x < 426) && (y > 125) && (y < 250))
-	{
-		turn_xo(319, 186, turn, 1, 1, game_logic);
-	}
-	else if ((x > 426) && (y > 125) && (y < 250))
-	{
-		turn_xo(533, 186, turn, 1, 2, game_logic);
-	}
-	else if ((x < 213) && (y > 250) && (y < 375))
-	{
-		turn_xo(106, 314, turn, 2, 0, game_logic);
+	//}
+	//else if ((x > 213) && (x < 426) && (y > 125) && (y < 250))
+	//{
+	//	turn_xo(319, 186, turn, 1, 1, game_logic);
+	//}
+	//else if ((x > 426) && (y > 125) && (y < 250))
+	//{
+	//	turn_xo(533, 186, turn, 1, 2, game_logic);
+	//}
+	//else if ((x < 213) && (y > 250) && (y < 375))
+	//{
+	//	turn_xo(106, 314, turn, 2, 0, game_logic);
 
-	}
-	else if ((x > 213) && (x < 426) && (y > 250) && (y < 375))
-	{
-		turn_xo(319, 314, turn, 2, 1, game_logic);
-	}
-	else if ((x > 426) && (y > 250) && (y < 375))
-	{
+	//}
+	//else if ((x > 213) && (x < 426) && (y > 250) && (y < 375))
+	//{
+	//	turn_xo(319, 314, turn, 2, 1, game_logic);
+	//}
+	//else if ((x > 426) && (y > 250) && (y < 375))
+	//{
+	//	turn_xo(533, 314, turn, 2, 2, game_logic);
+	//}
+	else {
 		turn_xo(533, 314, turn, 2, 2, game_logic);
 	}
 }
@@ -232,8 +246,10 @@ void game_message(bool& gameover, logic& game_logic)
 		al_draw_text(font, al_map_rgb(255, 255, 255), 1, 400, ALLEGRO_ALIGN_LEFT, "O won the game-- screen will close shortly");
 		gameover = true;
 	}
-	else
-		al_draw_text(font, al_map_rgb(255, 255, 255), 1, 400, ALLEGRO_ALIGN_LEFT, "Pick a Square");
+	else {
+		al_draw_text(font, al_map_rgb(255, 255, 255), 920, 520, ALLEGRO_ALIGN_LEFT, "Matched:\n");
+		al_draw_text(font, al_map_rgb(255, 255, 255), 920, 550, ALLEGRO_ALIGN_LEFT, "Remaining:\n");
+	}
 	al_destroy_font(font);
 
 }
