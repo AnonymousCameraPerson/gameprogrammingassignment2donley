@@ -20,7 +20,9 @@
 //void resetGame() //reset / clear the game.
 //void random_create(int imgToGenerate) //given the number of images needing to be generated.The objects will be randomly generated and randomly placed in the grid.
 
-
+//Only global variables I can have are
+int mx;
+int my;
 
 void set_graphics_x_o(int x, int y, logic& game_logic);
 void draw_board();
@@ -31,6 +33,8 @@ void turn_xo(int x, int y, int& turn, int boardx, int boardy, logic& game_logic)
 
 int main(void)
 {
+
+
 	logic  game_logic;
 	int posX = 0, posY = 0;
 	bool gameover = false;
@@ -116,7 +120,7 @@ int main(void)
 void draw_board()
 {
 	//al_draw_line(0, 375, 640, 375, al_map_rgb(255, 0, 0), 2);
-	//al_draw_filled_rectangle(0, 376, 640, 480, al_map_rgb(200, 200, 200));
+	al_draw_filled_rectangle(900, 0, 1366, 768, al_map_rgb(200, 100, 50));
 
 	//vertical lines
 	al_draw_line(180, 0, 180, 768, al_map_rgb(255, 255, 255), 2);
@@ -130,9 +134,7 @@ void draw_board()
 	al_draw_line(0, 320, 900, 320, al_map_rgb(255, 255, 255), 2);
 	al_draw_line(0, 480, 900, 480, al_map_rgb(255, 255, 255), 2);
 	al_draw_line(0, 640, 900, 640, al_map_rgb(255, 255, 255), 2);
-	//al_draw_line(0, 250, 640, 250, al_map_rgb(255, 255, 255), 2);
-	//al_draw_line(213, 0, 213, 375, al_map_rgb(255, 255, 255), 2);
-	//al_draw_line(426, 0, 426, 375, al_map_rgb(255, 255, 255), 2);
+	
 
 
 }
