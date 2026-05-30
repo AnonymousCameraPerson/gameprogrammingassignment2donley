@@ -35,7 +35,7 @@ int main(void)
 	int posX = 0, posY = 0;
 	bool gameover = false;
 	ALLEGRO_DISPLAY* Screen = NULL;
-	int width = 640, height = 480;
+	int width = 1366, height = 768;
 
 	if (!al_init())
 	{
@@ -115,13 +115,24 @@ int main(void)
 
 void draw_board()
 {
-	al_draw_line(0, 375, 640, 375, al_map_rgb(255, 0, 0), 2);
-	al_draw_filled_rectangle(0, 376, 640, 480, al_map_rgb(200, 200, 200));
+	//al_draw_line(0, 375, 640, 375, al_map_rgb(255, 0, 0), 2);
+	//al_draw_filled_rectangle(0, 376, 640, 480, al_map_rgb(200, 200, 200));
 
-	al_draw_line(0, 125, 640, 125, al_map_rgb(255, 255, 255), 2);
-	al_draw_line(0, 250, 640, 250, al_map_rgb(255, 255, 255), 2);
-	al_draw_line(213, 0, 213, 375, al_map_rgb(255, 255, 255), 2);
-	al_draw_line(426, 0, 426, 375, al_map_rgb(255, 255, 255), 2);
+	//vertical lines
+	al_draw_line(180, 0, 180, 768, al_map_rgb(255, 255, 255), 2);
+	al_draw_line(360, 0, 360, 768, al_map_rgb(255, 255, 255), 2);
+	al_draw_line(540, 0, 540, 768, al_map_rgb(255, 255, 255), 2);
+	al_draw_line(720, 0, 720, 768, al_map_rgb(255, 255, 255), 2);
+	al_draw_line(900, 0, 900, 768, al_map_rgb(255, 255, 255), 2);
+	
+	//horizontal lines
+	al_draw_line(0, 160, 900, 160, al_map_rgb(255, 255, 255), 2);
+	al_draw_line(0, 320, 900, 320, al_map_rgb(255, 255, 255), 2);
+	al_draw_line(0, 480, 900, 480, al_map_rgb(255, 255, 255), 2);
+	al_draw_line(0, 640, 900, 640, al_map_rgb(255, 255, 255), 2);
+	//al_draw_line(0, 250, 640, 250, al_map_rgb(255, 255, 255), 2);
+	//al_draw_line(213, 0, 213, 375, al_map_rgb(255, 255, 255), 2);
+	//al_draw_line(426, 0, 426, 375, al_map_rgb(255, 255, 255), 2);
 
 
 }
