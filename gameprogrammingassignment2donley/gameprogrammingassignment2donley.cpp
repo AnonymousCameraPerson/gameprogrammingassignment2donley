@@ -9,8 +9,8 @@
 
 
 
-//game_objects pattern;
-//bool already_played;
+//game_objects pattern[5][5];
+bool already_played[5][5];
 //game_objects ? get_shape(int index); // given a box number(index) it gets what is in that box in either the patter or guess.
 //void set_shape(int index); //given a box number and shape will fill in the pattern and guess.
 //bool checkGuess() //compares the guess and pattern.
@@ -42,7 +42,7 @@ int main(void)
 	int posX = 0, posY = 0;
 	bool gameover = false;
 	ALLEGRO_DISPLAY* Screen = NULL;
-	int width = 1366, height = 768;
+	int width = 900, height = 768;
 
 	if (!al_init())
 	{
@@ -124,8 +124,6 @@ int main(void)
 
 void draw_grid()
 {
-	//al_draw_line(0, 375, 640, 375, al_map_rgb(255, 0, 0), 2);
-	al_draw_filled_rectangle(900, 0, 1366, 768, al_map_rgb(200, 100, 50));
 
 	//vertical lines
 	al_draw_line(180, 0, 180, 768, al_map_rgb(255, 255, 255), 2);
@@ -157,45 +155,44 @@ void draw_o(int x, int y)
 
 
 void draw_objects(int x, int y) {
-	int random = rand() % 2;
+
+	game_objects shape = get_shape(x, y);
 	
-	switch (random)
-	{
-		case 0:
-			al_draw_filled_triangle(x-20, y-20, x+20, y+20, x, y, al_map_rgb(200, 0, 0));
-		case 1:
-			al_draw_filled_rectangle(x - 20, y - 20, x + 20, y + 20, al_map_rgb(255, 0, 0));
-		case 2:
-			al_draw_circle(x, y, 20, al_map_rgb(255, 255, 0), 4);
-		case 3:
-			al_draw_line(x - 20, y - 20, x + 20, y + 20, al_map_rgb(255, 0, 0), 2);
-			al_draw_line(x - 20, y + 20, x + 20, y - 20, al_map_rgb(255, 0, 0), 2);
-		case 4:
-			al_draw_filled_rectangle(x - 20, y - 20, x + 20, y + 20, al_map_rgb(0, 255, 0));
-			al_draw_line(x - 20, y - 20, x + 20, y + 20, al_map_rgb(255, 255, 0), 2);
-		case 5:
-			al_draw_filled_rectangle(x - 20, y - 20, x + 20, y + 20, al_map_rgb(255, 0, 255));
-			al_draw_circle(x, y, 20, al_map_rgb(255, 155, 0), 4);
-		case 6:
-			al_draw_line(x - 20, y + 20, x + 20, y - 20, al_map_rgb(255, 255, 0), 2);
-			al_draw_circle(x, y, 20, al_map_rgb(255, 255, 0), 4);
-		case 7:
-			al_draw_pieslice(x - 20, y - 20, 10 ,90, 10, al_map_rgb(200, 0, 0), 4);
-			al_draw_line(x - 20, y - 20, x + 20, y + 20, al_map_rgb(255, 255, 0), 2);
-		case 8:
-			al_draw_rectangle(x - 20, y - 20, x + 20, y + 20, al_map_rgb(255, 0, 0), 4);
-			al_draw_filled_rectangle(x - 10, y - 10, x + 10, y + 10, al_map_rgb(50, 200, 80));
-		case 9:
-			al_draw_line(x, y - 20, x, y + 20, al_map_rgb(255, 0, 0), 2);
-			al_draw_circle(x, y, 20, al_map_rgb(100, 100, 80), 4);
-			al_draw_circle(x, y, 40, al_map_rgb(0, 200, 0), 4);
-		case 10:
-			al_draw_pieslice(x, y, 30, 90, 30, al_map_rgb(50, 223, 0), 4);
-		case 11:
-			al_draw_ellipse(x, y, 20, 10, al_map_rgb(255, 0, 0), 4);
-			al_draw_circle(x, y, 20, al_map_rgb(255, 255, 0), 4);
-		case 12:
-			al_draw_rounded_rectangle(x - 20, y - 20, x + 20, y + 20, 5, 5, al_map_rgb(255, 0, 0), 4);
+	if (shape=="filled_triangle")
+		al_draw_filled_triangle(x-20, y-20, x+20, y+20, x, y, al_map_rgb(200, 0, 0));
+	else if (shape=="filled_rectangle")
+		al_draw_filled_rectangle(x - 20, y - 20, x + 20, y + 20, al_map_rgb(255, 0, 0));
+	else if (shape=="circle")
+		al_draw_circle(x, y, 20, al_map_rgb(255, 255, 0), 4);
+	else if (shape=="x")
+		al_draw_line(x - 20, y - 20, x + 20, y + 20, al_map_rgb(255, 0, 0), 2);
+		al_draw_line(x - 20, y + 20, x + 20, y - 20, al_map_rgb(255, 0, 0), 2);
+	else if (shape == "rec_with_line")
+		al_draw_filled_rectangle(x - 20, y - 20, x + 20, y + 20, al_map_rgb(0, 255, 0));
+		al_draw_line(x - 20, y - 20, x + 20, y + 20, al_map_rgb(255, 255, 0), 2);
+	else if (shape=="rec_with_circle")
+		al_draw_filled_rectangle(x - 20, y - 20, x + 20, y + 20, al_map_rgb(255, 0, 255));
+		al_draw_circle(x, y, 20, al_map_rgb(255, 155, 0), 4);
+	else if (shape=="circle_with_line")
+		al_draw_line(x - 20, y + 20, x + 20, y - 20, al_map_rgb(255, 255, 0), 2);
+		al_draw_circle(x, y, 20, al_map_rgb(255, 255, 0), 4);
+	else if (shape=="pieslice_with_line")
+		al_draw_pieslice(x - 20, y - 20, 10 ,90, 10, al_map_rgb(200, 0, 0), 4);
+		al_draw_line(x - 20, y - 20, x + 20, y + 20, al_map_rgb(255, 255, 0), 2);
+	else if (shape=="rectangles")
+		al_draw_rectangle(x - 20, y - 20, x + 20, y + 20, al_map_rgb(255, 0, 0), 4);
+		al_draw_filled_rectangle(x - 10, y - 10, x + 10, y + 10, al_map_rgb(50, 200, 80));
+	else if (shape=="circles_with_line")
+		al_draw_line(x, y - 20, x, y + 20, al_map_rgb(255, 0, 0), 2);
+		al_draw_circle(x, y, 20, al_map_rgb(100, 100, 80), 4);
+		al_draw_circle(x, y, 40, al_map_rgb(0, 200, 0), 4);
+	else if (shape=="pieslice")
+		al_draw_pieslice(x, y, 30, 90, 30, al_map_rgb(50, 223, 0), 4);
+	else if (shape=="ellipse")
+		al_draw_ellipse(x, y, 20, 10, al_map_rgb(255, 0, 0), 4);
+		al_draw_circle(x, y, 20, al_map_rgb(255, 255, 0), 4);
+	else if (shape=="rounded_rec")
+		al_draw_rounded_rectangle(x - 20, y - 20, x + 20, y + 20, 5, 5, al_map_rgb(255, 0, 0), 4);
 
 	}
 
