@@ -18,12 +18,15 @@
     <ClCompile Include="gameprogrammingassignment2donley.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="logic.cpp">
+    <ClCompile Include="game_logic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="logic.h">
+    <ClInclude Include="game_logic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

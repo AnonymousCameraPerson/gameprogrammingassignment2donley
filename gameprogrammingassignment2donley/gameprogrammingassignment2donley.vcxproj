@@ -153,10 +153,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="gameprogrammingassignment2donley.cpp" />
-    <ClCompile Include="logic.cpp" />
+    <ClCompile Include="game_logic.cpp" />
+    <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="logic.h" />
+    <ClInclude Include="game_logic.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
