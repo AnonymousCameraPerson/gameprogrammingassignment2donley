@@ -259,62 +259,90 @@ void draw_objects(int x, int y, std::string shape) {
 //		//}
 //	}
 //}
+
 void set_graphics_x_o(int x, int y, game_logic& game)
 {
 	static int turn = 0;
 	std::string shape;
+	int x_shape;
+	int y_shape;
 
 	//first row
 	if ((x < 180) && (y < 160))
 	{
+
 		shape=game.select_card(0, 0);
+		x_shape = 80;
+		y_shape = 80;
 		//turn_xo(80, 80, turn, 0, 0, game_logic);
 	}
 	else if ((x < 360) && (x>180) && (y < 160))
 	{
 		shape = game.select_card(0, 1);
+		x_shape = 270;
+		y_shape = 80;
 		//turn_xo(270, 80, turn, 0, 1, game_logic);
 	}
 	else if ((x < 540) && (x > 360) && (y < 160))
 	{
 		shape = game.select_card(0, 2);
+		x_shape = 450;
+		y_shape = 80;
 		//turn_xo(450, 80, turn, 0, 2, game);
 	}
 	else if ((x < 720) && (x>540) && (y<160))
 	{
 		shape = game.select_card(0, 3);
+		x_shape = 630;
+		y_shape = 80;
 		//turn_xo(630, 80, turn, 0, 3, game);
 	}
 	else if ((x < 900) && (x > 720) && (y < 160)) 
 	{
 		shape = game.select_card(0, 4);
+		x_shape = 820;
+		y_shape = 80;
 		//turn_xo(820, 80, turn, 0, 4, game);
 	}
 
+	//get top left coordinate
+	// width and height
+	// get center
+	// get shape's x and y, set it to half of shape
 	//second row
 	else if ((x < 180) && (y<320))
 	{
 		shape = game.select_card(1,0);
+		x_shape = 80;
+		y_shape = 240;
 		//turn_xo(80, 240, turn, 0, 5, game);
 	}
 	else if ((x < 360) && (x > 180) && (y < 320))
 	{
 		shape = game.select_card(1, 1);
+		x_shape = 270;
+		y_shape = 240;
 		//turn_xo(270, 240, turn, 0, 6, game);
 	}
 	else if ((x < 540) && (x > 360) && (y < 320) )
 	{
 		shape = game.select_card(1, 2);
+		x_shape = 450;
+		y_shape = 240;
 		//turn_xo(450, 240, turn, 0, 7, game);
 	}
 	else if ((x < 720) && (x > 540) && (y < 320)) 
 	{
 		shape = game.select_card(1, 3);
+		x_shape = 630;
+		y_shape = 240;
 		//turn_xo(630, 240, turn, 0, 8, game);
 	}
 	else if ((x < 900) && (x > 720) && (y < 320) ) 
 	{
 		shape = game.select_card(1, 4);
+		x_shape = 820;
+		y_shape = 240;
 		//turn_xo(820, 240, turn, 0, 9, game);
 	}
 
@@ -322,26 +350,36 @@ void set_graphics_x_o(int x, int y, game_logic& game)
 	else if ((x < 180) && (y < 480))
 	{
 		shape = game.select_card(2, 0);
+		x_shape = 80;
+		y_shape = 400;
 		//turn_xo(80, 400, turn, 0, 10, game);
 	}
 	else if ((x < 360) && (x > 180) && (y < 480))
 	{
 		shape = game.select_card(2, 1);
+		x_shape = 270;
+		y_shape = 400;
 		//turn_xo(270, 400, turn, 0, 11, game);
 	}
 	else if ((x < 540) && (x > 360) && (y < 480))
 	{
 		shape = game.select_card(2, 2);
+		x_shape = 450;
+		y_shape = 400;
 		//turn_xo(450, 400, turn, 0, 12, game);
 	}
 	else if ((x < 720) && (x > 540) && (y < 480) ) 
 	{
 		shape = game.select_card(2, 3);
+		x_shape = 630;
+		y_shape = 400;
 		//turn_xo(630, 400, turn, 0, 13, game);
 	}
 	else if ((x < 900) && (x > 720) && (y < 480)) 
 	{
 		shape = game.select_card(2, 4);
+		x_shape = 820;
+		y_shape = 400;
 		//turn_xo(820, 400, turn, 0, 14, game);
 	}
 
@@ -349,26 +387,36 @@ void set_graphics_x_o(int x, int y, game_logic& game)
 	else if ((x < 180) && (y < 640))
 	{
 		shape = game.select_card(3, 0);
+		x_shape = 80;
+		y_shape = 560;
 		//turn_xo(80, 560, turn, 0, 15, game);
 	}
 	else if ((x < 360) && (x > 180) && (y < 640))
 	{
 		shape = game.select_card(3, 1);
+		x_shape = 270;
+		y_shape = 560;
 		//turn_xo(270, 560, turn, 0, 16, game);
 	}
 	else if ((x < 540) && (x > 360) && (y < 640))
 	{
 		shape = game.select_card(3, 2);
+		x_shape = 450;
+		y_shape = 560;
 		//turn_xo(450, 560, turn, 0, 17, game);
 	}
 	else if ((x < 720) && (x > 540) && (y < 640)) 
 	{
 		shape = game.select_card(3, 3);
+		x_shape = 630;
+		y_shape = 560;
 		//turn_xo(630, 560, turn, 0, 18, game);
 	}
 	else if ((x < 900) && (x > 720) && (y < 640)) 
 	{
 		shape = game.select_card(3, 4);
+		x_shape = 820;
+		y_shape = 560;
 		//turn_xo(820, 560, turn, 0, 19, game);
 	}
 
@@ -376,29 +424,39 @@ void set_graphics_x_o(int x, int y, game_logic& game)
 	else if ((x < 180) && (y > 640))
 	{
 		shape = game.select_card(4, 0);
+		x_shape = 80;
+		y_shape = 720;
 		//turn_xo(80, 720, turn, 0, 20, game);
 	}
 	else if ((x < 360) && (x > 180) && (y > 640))
 	{
 		shape = game.select_card(4, 1);
+		x_shape = 270;
+		y_shape = 720;
 		//turn_xo(270, 720, turn, 0, 21, game);
 	}
 	else if ((x < 540) && (x > 360) && (y > 640))
 	{
 		shape = game.select_card(4, 2);
+		x_shape = 450;
+		y_shape = 720;
 		//turn_xo(450, 720, turn, 0, 22, game);
 	}
 	else if ((x < 720) && (x > 540) && (y > 640)) 
 	{
 		shape = game.select_card(4, 3);
+		x_shape = 630;
+		y_shape = 720;
 		//turn_xo(630, 720, turn, 0, 23, game);
 	}
 	else if ((x < 900) && (x > 720) && (y > 640)) 
 	{
 		shape = game.select_card(4, 4);
+		x_shape = 820;
+		y_shape = 720;
 		//turn_xo(820, 720, turn, 0, 24, game);
 	}
-	draw_objects(x, y, shape);
+	draw_objects(x_shape, y_shape, shape);
 }
 
 void game_message(bool& gameover, game_logic& game)
