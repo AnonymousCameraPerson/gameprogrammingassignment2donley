@@ -88,6 +88,7 @@ void game_logic::checkShapes(std::string shape, int& turn, int x, int y) {
 		if (compare(shape1, shape2)) {
 			//leave cards facing up
 			matched += 1;
+			remaining -= 1;
 		}
 		else {
 			
@@ -112,6 +113,19 @@ bool game_logic::compare(std::string shape, std::string pattern) {
 	return false;
 	
 }
+//
+//void game_logic::draw_status() {
+//	//write status in bottom right hand square
+//	//ALLEGRO_FONT* font = al_load_font("college.ttf", 24, 0);
+//
+//	ALLEGRO_FONT* font = al_load_font("college.ttf", 24, 0);
+//
+//	al_draw_textf(font, al_map_rgb(255, 255, 255), 730, 650, ALLEGRO_ALIGN_LEFT, "Matched: %i", matched);
+//	al_draw_textf(font, al_map_rgb(255, 255, 255), 730, 680, ALLEGRO_ALIGN_LEFT, "Remaining: %i", remaining);
+//	
+//	al_flip_display();
+//	al_destroy_font(font);
+//}
 
 
 void game_logic::random_create()
