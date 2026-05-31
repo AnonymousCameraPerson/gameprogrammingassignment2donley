@@ -82,6 +82,7 @@ int main(void)
 	al_init_primitives_addon();
 	al_init_font_addon();
 	al_init_ttf_addon();
+	
 
 	bool draw = false, done = false;;
 
@@ -121,7 +122,6 @@ int main(void)
 			}
 		}
 		draw_grid();
-		game.random_create();
 		draw_status();
 		game_message(gameover, game);
 		if (draw)
@@ -164,8 +164,10 @@ void draw_grid()
 void draw_status() {
 	//write status in bottom right hand square
 	//ALLEGRO_FONT* font = al_load_font("college.ttf", 24, 0);
-	//al_draw_text(font, al_map_rgb(255, 255, 255), 850, 520, ALLEGRO_ALIGN_LEFT, "Matched:\n");
-	//al_draw_text(font, al_map_rgb(255, 255, 255), 850, 550, ALLEGRO_ALIGN_LEFT, "Remaining:\n");
+	ALLEGRO_FONT* font = al_load_font("college.ttf", 24, 0);
+	al_draw_text(font, al_map_rgb(255, 255, 255), 730, 650, ALLEGRO_ALIGN_LEFT, "Matched:\n");
+	al_draw_text(font, al_map_rgb(255, 255, 255), 730, 680, ALLEGRO_ALIGN_LEFT, "Remaining:\n");
+	al_destroy_font(font);
 }
 
 
@@ -184,7 +186,7 @@ void draw_objects(int x, int y, std::string shape) {
 
 	
 	if (shape == "filled_triangle") {
-		al_draw_filled_triangle(x, y, x + 50, y + 50, x - 50, y + 50, al_map_rgb(200, 100, 50));
+		al_draw_filled_triangle(x-10, y-10, x + 50, y + 50, x - 50, y + 50, al_map_rgb(200, 100, 50));
 	}
 	else if (shape == "filled_rectangle") {
 		al_draw_filled_rectangle(x - 20, y - 20, x + 20, y + 20, al_map_rgb(255, 0, 0));
@@ -480,10 +482,10 @@ void game_message(bool& gameover, game_logic& game)
 		al_draw_text(font, al_map_rgb(255, 255, 255), 1, 400, ALLEGRO_ALIGN_LEFT, "O won the game-- screen will close shortly");
 		gameover = true;
 	}
-	else {
-		al_draw_text(font, al_map_rgb(255, 255, 255), 920, 520, ALLEGRO_ALIGN_LEFT, "Matched:\n");
-		al_draw_text(font, al_map_rgb(255, 255, 255), 920, 550, ALLEGRO_ALIGN_LEFT, "Remaining:\n");
-	}
+	//else {
+	//	al_draw_text(font, al_map_rgb(255, 255, 255), 920, 520, ALLEGRO_ALIGN_LEFT, "Matched:\n");
+	//	al_draw_text(font, al_map_rgb(255, 255, 255), 920, 550, ALLEGRO_ALIGN_LEFT, "Remaining:\n");
+	//}
 	al_destroy_font(font);
 
 }
