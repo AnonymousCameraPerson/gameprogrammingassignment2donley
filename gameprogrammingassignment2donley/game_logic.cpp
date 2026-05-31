@@ -6,12 +6,12 @@
 #include <algorithm>
 #include <random>
 
-void game_logic::setup()
-{
-	for (int i = 0; i < 5; i++)
-		for (int j = 0; j < 5; j++)
-			board[i][j] = 'n';
-}
+//void game_logic::setup()
+//{
+//	for (int i = 0; i < 5; i++)
+//		for (int j = 0; j < 5; j++)
+//			board[i][j] = 'n';
+//}
 //bool game_logic::set_x(int x, int y)
 //{
 //	if (board[x][y] == 'n')
@@ -29,27 +29,58 @@ void game_logic::setup()
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 //instead of set_x:
-std::string game_logic::select_card(int row, int col) {
+std::string game_logic::select_card(int row, int col, int& turn) {
 	std::string shape = get_shape(row, col);
+	
+	if (shape != "" && turn ==0) {
+		shape1 = shape;
+		turn=1;
+		//reveal
+	}
+	else if (shape != "" && turn == 1) {
+		shape2 = shape;
+		turn == 0;
+		if (compare(shape1, shape2)) {
+			//leave cards facing up
+			matched += 1;
 
-	//if (board[row][col] == 'n') {
-		
+		}
+		else {
+			shape = get_shape(4, 4);
+			shape1 = shape;
+			shape2 = shape;
+			//turn around
+		}
+		//compare
+	}
+	return shape;
+
 		//reveal or compare
 		//if turn==0, they have to pick another card
 		//else, compare
 	//}
-
 	//else, you have to pick a different 
-	return shape;
-
+	
 }
+
+bool game_logic::compare(std::string shape, std::string pattern) {
+	if (shape == pattern) {
+		//leave cards turned over
+		return true;
+	}	
+	//turn over after 5 seconds
+	return false;
+	
+}
+
+
 
 void game_logic::random_create()
 {
 	std::array<std::string, 25> arr = {"filled_triangle", "filled_triangle","filled_rectangle","filled_rectangle", "circle",
 		"circle", "rec_with_line", "rec_with_line", "rec_with_circle", "rec_with_circle", "circle_with_line",
 		"circle_with_line", "pieslice_with_line", "pieslice_with_line", "rectangles", "rectangles", "circles_with_line",
-		"circles_with_line", "pieslice", "pieslice", "ellipse", "ellipse", "rounded_rec", "rounded_rec", "NULL"};
+		"circles_with_line", "pieslice", "pieslice", "ellipse", "ellipse", "rounded_rec", "rounded_rec", "black_rec"};
 
 	//std::string pattern[5][5];
 
