@@ -29,14 +29,18 @@ void game_logic::setup()
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 //instead of set_x:
-void game_logic::select_card(int row, int col) {
-	if (board[row][col] == 'n') {
+std::string game_logic::select_card(int row, int col) {
+	std::string shape = get_shape(row, col);
+
+	//if (board[row][col] == 'n') {
+		
 		//reveal or compare
 		//if turn==0, they have to pick another card
 		//else, compare
-	}
+	//}
 
-	//else, you have to pick a different one
+	//else, you have to pick a different 
+	return shape;
 
 }
 
@@ -47,7 +51,7 @@ void game_logic::random_create()
 		"circle_with_line", "pieslice_with_line", "pieslice_with_line", "rectangles", "rectangles", "circles_with_line",
 		"circles_with_line", "pieslice", "pieslice", "ellipse", "ellipse", "rounded_rec", "rounded_rec", "NULL"};
 
-	std::string pattern[5][5];
+	//std::string pattern[5][5];
 
 	std::random_device rd;
 	std::mt19937 g(rd());
