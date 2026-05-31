@@ -8,7 +8,8 @@ public:
 	bool set_x(int x, int y);
 	bool set_o(int x, int y);
 	void done(bool& tie, bool& xwon, bool& owon);
-	std::string select_card(int row, int col, int& turn);
+	std::string select_card(int row, int col);
+	void checkShapes(std::string shape, int& turn, int x, int y);
 	void random_create();
 	bool compare(std::string shape, std::string pattern);
 	std::string get_shape(int index1, int index2);
@@ -18,7 +19,7 @@ private:
 	std::string shape1;
 	std::string shape2;
 	int matched;
-	int x1;
-	int y1;
+	int row1;
+	int col1;
 };
 

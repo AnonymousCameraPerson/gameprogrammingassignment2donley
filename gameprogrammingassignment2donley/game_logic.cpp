@@ -5,6 +5,15 @@
 #include <string>
 #include <algorithm>
 #include <random>
+#include <allegro5\allegro.h>
+#include <allegro5\allegro_font.h>
+#include <allegro5\allegro_ttf.h>
+#include <allegro5\allegro_primitives.h>	
+#include <thread>
+#include <chrono>
+#include <cstdio>
+
+
 
 //void game_logic::setup()
 //{
@@ -29,38 +38,69 @@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 //instead of set_x:
-std::string game_logic::select_card(int row, int col, int& turn) {
+std::string game_logic::select_card(int row, int col) {
+
 	std::string shape = get_shape(row, col);
+	return shape;
 	
-	if (shape != "" && turn ==0) {
+	//if (shape != "black_rec" && turn ==0) {
+	//	shape1 = shape;
+	//	row1 = x;
+	//	col1 = y;
+	//	turn=1;
+	//	//reveal
+	//}
+	//else if (shape != "black_rec" && turn == 1) {
+	//	shape2 = shape;
+	//	turn = 0;
+	//	if (compare(shape1, shape2)) {
+	//		//leave cards facing up
+	//		matched += 1;
+	//	}
+	//	else {
+	//		shape1 = get_shape(4, 4);
+	//		shape2 = get_shape(4, 4);
+
+	//		//turn around
+	//		al_draw_filled_rectangle(x-100, y-100, x + 100, y + 100, al_map_rgb(0, 0, 0)); //black color
+	//		al_draw_filled_rectangle(row1-100, col1-100, row1 + 100, col1 + 100, al_map_rgb(0, 0, 0));
+	//		return shape2;
+	//	}
+	//	
+	//}
+	//return shape;
+
+}
+
+void game_logic::checkShapes(std::string shape, int& turn, int x, int y) {
+
+
+	if (shape != "black_rec" && turn == 0) {
 		shape1 = shape;
-		turn=1;
+		row1 = x;
+		col1 = y;
+		turn = 1;
 		//reveal
 	}
-	else if (shape != "" && turn == 1) {
+	else if (shape != "black_rec" && turn == 1) {
 		shape2 = shape;
-		turn == 0;
+		turn = 0;
 		if (compare(shape1, shape2)) {
 			//leave cards facing up
 			matched += 1;
-
 		}
 		else {
-			shape = get_shape(4, 4);
-			shape1 = shape;
-			shape2 = shape;
+			
+			//std::this_thread::sleep_for(std::chrono::seconds(5));
+			//system("timeout /t 5 /nobreak");
+			std::this_thread::sleep_for(std::chrono::seconds(5));
 			//turn around
+			al_draw_filled_rectangle(x - 80, y - 80, x + 80, y + 80, al_map_rgb(0, 0, 0)); //black color
+			al_draw_filled_rectangle(row1 - 80, col1 - 80, row1 + 80, col1 + 80, al_map_rgb(0, 0, 0));
+			
 		}
-		//compare
-	}
-	return shape;
 
-		//reveal or compare
-		//if turn==0, they have to pick another card
-		//else, compare
-	//}
-	//else, you have to pick a different 
-	
+	}
 }
 
 bool game_logic::compare(std::string shape, std::string pattern) {
@@ -72,7 +112,6 @@ bool game_logic::compare(std::string shape, std::string pattern) {
 	return false;
 	
 }
-
 
 
 void game_logic::random_create()
@@ -103,30 +142,9 @@ std::string game_logic::get_shape(int index1, int index2) {
 }
 
 
-//bool game_logic::set_o(int x, int y)
-//{
-//	if (board[x][y] == 'n')
-//	{
-//		board[x][y] = 'o';
-//		return true;
-//	}
-//	return false;
-//}
 void game_logic::done(bool& tie, bool& xwon, bool& owon)
 {
-	//if //cards match
-	//{
-	//	xwon = true;
-	//	tie = false;
-	//	owon = false;
-	//}
-	//else if //(cards don't match)
-	//{
-	//	xwon = false;
-	//	tie = false;
-	//	owon = true;
-	//}
-	
+	//
 }
 
 
