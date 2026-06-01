@@ -114,9 +114,10 @@ int main(void)
 	al_flip_display();
 	while (!done && !gameover)
 	{
-
 		ALLEGRO_EVENT ev;
 		al_wait_for_event(event_queue, &ev);
+		
+		
 		if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
 		{
 			done = true;
@@ -134,6 +135,21 @@ int main(void)
 		draw_grid();
 		draw_status(font, matched, remaining);
 		game_message(gameover, game);
+		if (remaining == 2) {
+			al_draw_filled_rectangle(730, 650, 890, 730, al_map_rgb(0, 0, 0));
+			//al_draw_filled_rectangle(700, 600, 890, 730, al_map_rgb(100, 0, 0));
+			al_draw_text(font, al_map_rgb(255, 255, 255), 740, 650, ALLEGRO_ALIGN_LEFT, "Play Again?");
+			al_draw_text(font, al_map_rgb(255, 255, 255), 740, 680, ALLEGRO_ALIGN_LEFT, "(y or n)");
+			if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
+				if (ev.keyboard.keycode == ALLEGRO_KEY_Y) {
+					al_clear_to_color(al_map_rgb(0, 0, 0));
+				}
+				if (ev.keyboard.keycode == ALLEGRO_KEY_N) {
+					done = true;
+					gameover = true;
+				}
+			}
+		}
 		if (draw)
 		{
 
@@ -141,36 +157,25 @@ int main(void)
 			set_graphics_x_o(posX, posY, game, turn, matched, remaining);
 
 			draw = false;
-			if (remaining == 0) {
-				al_draw_filled_rectangle(725, 650, 890, 730, al_map_rgb(100, 0, 0));
-				al_draw_text(font, al_map_rgb(255, 255, 255), 730, 650, ALLEGRO_ALIGN_LEFT, "Play Again? (y/n)");
-				if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
-					if (ev.keyboard.keycode == ALLEGRO_KEY_Y) {
-						al_clear_to_color(al_map_rgb(0, 0, 0));
-					}
-					if (ev.keyboard.keycode == ALLEGRO_KEY_N) {
-						done = true;
-					}
-				}
-			}
+			
 		}
 		al_flip_display();
 		//al_flip_display();
 		//if (turn == 1) {
 		//	system("timeout /t 5 /nobreak");
 		//}
-		if (remaining == 0){
-			al_draw_filled_rectangle(725, 650, 890, 730, al_map_rgb(100, 100, 0));
-			al_draw_text(font, al_map_rgb(255, 255, 255), 730, 650, ALLEGRO_ALIGN_LEFT, "Play Again? (y/n)");
-			if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
-				if (ev.keyboard.keycode == ALLEGRO_KEY_Y) {
-					al_clear_to_color(al_map_rgb(0, 0, 0));
-				}
-				if (ev.keyboard.keycode == ALLEGRO_KEY_N) {
-					done=true;
-				}
-			}
-		}
+		//if (remaining == 0){
+		//	al_draw_filled_rectangle(725, 650, 890, 730, al_map_rgb(100, 100, 0));
+		//	al_draw_text(font, al_map_rgb(255, 255, 255), 730, 650, ALLEGRO_ALIGN_LEFT, "Play Again? (y/n)");
+		//	if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
+		//		if (ev.keyboard.keycode == ALLEGRO_KEY_Y) {
+		//			al_clear_to_color(al_map_rgb(0, 0, 0));
+		//		}
+		//		if (ev.keyboard.keycode == ALLEGRO_KEY_N) {
+		//			done=true;
+		//		}
+		//	}
+		//}
 	}
 	al_rest(5.0);
 	al_destroy_font(font);
