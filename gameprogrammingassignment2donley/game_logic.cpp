@@ -67,12 +67,12 @@ std::string game_logic::select_card(int row, int col) {
 	//		return shape2;
 	//	}
 	//	
-	//}
+	//
 	//return shape;
 
 }
 
-void game_logic::checkShapes(std::string shape, int& turn, int x, int y) {
+void game_logic::checkShapes(std::string shape, int& turn, int x, int y, int& matched, int& remaining) {
 
 
 	if (shape != "black_rec" && turn == 0) {
@@ -94,7 +94,7 @@ void game_logic::checkShapes(std::string shape, int& turn, int x, int y) {
 			
 			//std::this_thread::sleep_for(std::chrono::seconds(5));
 			//system("timeout /t 5 /nobreak");
-			std::this_thread::sleep_for(std::chrono::seconds(5));
+			std::this_thread::sleep_for(std::chrono::seconds(3));
 			//turn around
 			al_draw_filled_rectangle(x - 80, y - 80, x + 80, y + 80, al_map_rgb(0, 0, 0)); //black color
 			al_draw_filled_rectangle(row1 - 80, col1 - 80, row1 + 80, col1 + 80, al_map_rgb(0, 0, 0));

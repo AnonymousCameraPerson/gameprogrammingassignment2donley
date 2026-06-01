@@ -9,9 +9,9 @@ public:
 	bool set_o(int x, int y);
 	void done(bool& tie, bool& xwon, bool& owon);
 	std::string select_card(int row, int col);
-	void checkShapes(std::string shape, int& turn, int x, int y);
+	void checkShapes(std::string shape, int& turn, int x, int y, int& matched, int& remaining);
 	void random_create();
-	void draw_status();
+	//void draw_status();
 	bool compare(std::string shape, std::string pattern);
 	std::string get_shape(int index1, int index2);
 private:

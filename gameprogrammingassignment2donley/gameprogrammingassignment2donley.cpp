@@ -35,7 +35,7 @@ void random_create(); //given the number of images needing to be generated.The o
 //following funtions I added
 
 void draw_grid(); //draws 5x5 grid
-void draw_status(); //draws the bottom right hand square and status info
+void draw_status(ALLEGRO_FONT* font, int matched, int remaining); //draws the bottom right hand square and status info
 int get_mouse_input();
 
 void draw_objects(int x, int y, game_logic& game); //x and y are center of box
@@ -46,7 +46,7 @@ void draw_objects(int x, int y, game_logic& game); //x and y are center of box
 int mx;
 int my;
 
-void set_graphics_x_o(int x, int y, game_logic& game, int& turn);
+void set_graphics_x_o(int x, int y, game_logic& game, int& turn, int& matched, int& remaining);
 
 void game_message(bool& gameover, game_logic& game);
 void turn_xo(int x, int y, int& turn, int boardx, int boardy, game_logic& game);
@@ -59,19 +59,21 @@ int main(void)
 
 	int posX = 0, posY = 0;
 	int x1=0, xy=0;
+	static int matched = 0;
+	static int remaining=12;
 	static int turn = 0;
 	bool gameover = false;
 	ALLEGRO_DISPLAY* Screen = NULL;
 	int width = 900, height = 768;
 
-
+	al_init();
 	if (!al_init())
 	{
 		al_show_native_message_box(NULL, "Error!", "Allegro has failed to initialize.", 0, 0, ALLEGRO_MESSAGEBOX_ERROR);
 		return (-1);
 	}
 
-
+	al_install_keyboard();
 	Screen = al_create_display(width, height);
 	if (Screen == NULL)
 	{
@@ -86,7 +88,10 @@ int main(void)
 	al_init_primitives_addon();
 	al_init_font_addon();
 	al_init_ttf_addon();
-	
+	ALLEGRO_FONT* font = al_load_ttf_font("college.ttf", 24, 0);
+	if (!font) {
+		al_show_native_message_box(Screen, "Error", "Error", "Could not load font", NULL, ALLEGRO_MESSAGEBOX_ERROR);
+	}
 
 	bool draw = false, done = false;;
 
@@ -94,7 +99,7 @@ int main(void)
 
 	event_queue = al_create_event_queue();
 
-
+	al_register_event_source(event_queue, al_get_keyboard_event_source());
 	al_register_event_source(event_queue, al_get_display_event_source(Screen));
 	al_clear_to_color(al_map_rgb(0, 0, 0));
 
@@ -103,12 +108,13 @@ int main(void)
 	//game.setup();
 	draw_grid();
 	game.random_create();
-	draw_status();
+	draw_status(font, matched, remaining);
 	//game_message(gameover, game);
 
 	al_flip_display();
 	while (!done && !gameover)
 	{
+
 		ALLEGRO_EVENT ev;
 		al_wait_for_event(event_queue, &ev);
 		if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
@@ -126,22 +132,48 @@ int main(void)
 			}
 		}
 		draw_grid();
-		draw_status();
+		draw_status(font, matched, remaining);
 		game_message(gameover, game);
 		if (draw)
 		{
 
-			set_graphics_x_o(posX, posY, game, turn);
+
+			set_graphics_x_o(posX, posY, game, turn, matched, remaining);
 
 			draw = false;
+			if (remaining == 0) {
+				al_draw_filled_rectangle(725, 650, 890, 730, al_map_rgb(100, 0, 0));
+				al_draw_text(font, al_map_rgb(255, 255, 255), 730, 650, ALLEGRO_ALIGN_LEFT, "Play Again? (y/n)");
+				if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
+					if (ev.keyboard.keycode == ALLEGRO_KEY_Y) {
+						al_clear_to_color(al_map_rgb(0, 0, 0));
+					}
+					if (ev.keyboard.keycode == ALLEGRO_KEY_N) {
+						done = true;
+					}
+				}
+			}
 		}
 		al_flip_display();
 		//al_flip_display();
 		//if (turn == 1) {
 		//	system("timeout /t 5 /nobreak");
 		//}
+		if (remaining == 0){
+			al_draw_filled_rectangle(725, 650, 890, 730, al_map_rgb(100, 100, 0));
+			al_draw_text(font, al_map_rgb(255, 255, 255), 730, 650, ALLEGRO_ALIGN_LEFT, "Play Again? (y/n)");
+			if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
+				if (ev.keyboard.keycode == ALLEGRO_KEY_Y) {
+					al_clear_to_color(al_map_rgb(0, 0, 0));
+				}
+				if (ev.keyboard.keycode == ALLEGRO_KEY_N) {
+					done=true;
+				}
+			}
+		}
 	}
 	al_rest(5.0);
+	al_destroy_font(font);
 	al_destroy_event_queue(event_queue);
 	al_destroy_display(Screen);						//destroy our display object
 
@@ -169,13 +201,13 @@ void draw_grid()
 
 
 
-void draw_status() {
+void draw_status(ALLEGRO_FONT* font, int matched, int remaining) {
 	//write status in bottom right hand square
 	//ALLEGRO_FONT* font = al_load_font("college.ttf", 24, 0);
-	ALLEGRO_FONT* font = al_load_font("college.ttf", 24, 0);
-	al_draw_text(font, al_map_rgb(255, 255, 255), 730, 650, ALLEGRO_ALIGN_LEFT, "Matched:\n");
-	al_draw_text(font, al_map_rgb(255, 255, 255), 730, 680, ALLEGRO_ALIGN_LEFT, "Remaining:\n");
-	al_destroy_font(font);
+	al_draw_filled_rectangle(725, 650, 890, 730, al_map_rgb(0, 0, 0));
+	al_draw_textf(font, al_map_rgb(255, 255, 255), 730, 650, ALLEGRO_ALIGN_LEFT, "Matched: %i", matched);
+	al_draw_textf(font, al_map_rgb(255, 255, 255), 730, 680, ALLEGRO_ALIGN_LEFT, "Remaining: %i", remaining);
+	
 }
 
 
@@ -274,7 +306,7 @@ void draw_objects(int x, int y, std::string shape) {
 //	}
 //}
 
-void set_graphics_x_o(int x, int y, game_logic& game, int& turn)
+void set_graphics_x_o(int x, int y, game_logic& game, int& turn, int& matched, int& remaining)
 {
 	//static int turn = 0;
 	std::string shape;
@@ -499,9 +531,11 @@ void set_graphics_x_o(int x, int y, game_logic& game, int& turn)
 	draw_objects(x_shape, y_shape, shape);
 	al_flip_display();
 	//if (turn == 1) {
-	//	system("timeout /t 5 /nobreak");
+	//	system("timeout /t
+	// 5 /nobreak");
 	//}
-	game.checkShapes(shape, turn, x_shape, y_shape);
+
+	game.checkShapes(shape, turn, x_shape, y_shape, matched, remaining);
 }
 
 void game_message(bool& gameover, game_logic& game)
