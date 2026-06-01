@@ -20,23 +20,10 @@
 //Check if a card is selected
 //Then reveal or compare it
 
-//game_objects pattern[5][5];
-
-bool already_played[5][5];
-std::string get_shape(int index); // given a box number(index) it gets what is in that box in either the patter or guess.
-
-//void set_shape(int index); //given a box number and shape will fill in the pattern and guess.
-//bool checkGuess() //compares the guess and pattern.
-//void resetGame() //reset / clear the game.
-
 void random_create(); //given the number of images needing to be generated.The objects will be randomly generated and randomly placed in the grid.
-
-//get_mouse_input() //get mouse input
-//following funtions I added
 
 void draw_grid(); //draws 5x5 grid
 void draw_status(ALLEGRO_FONT* font, int matched, int remaining); //draws the bottom right hand square and status info
-int get_mouse_input();
 
 void draw_objects(int x, int y, game_logic& game); //x and y are center of box
 
@@ -48,7 +35,6 @@ int my;
 
 void set_graphics_x_o(int x, int y, game_logic& game, int& turn, int& matched, int& remaining);
 
-void game_message(bool& gameover, game_logic& game);
 void turn_xo(int x, int y, int& turn, int boardx, int boardy, game_logic& game);
 
 int main(void)
@@ -105,11 +91,8 @@ int main(void)
 
 	al_register_event_source(event_queue, al_get_mouse_event_source());
 
-	//game.setup();
 	draw_grid();
 	game.random_create();
-	//draw_status(font, matched, remaining);
-	//game_message(gameover, game);
 
 	al_flip_display();
 	while (!done && !gameover)
@@ -134,7 +117,7 @@ int main(void)
 		}
 		draw_grid();
 		draw_status(font, matched, remaining);
-		game_message(gameover, game);
+
 		if (remaining == 0) {
 			al_draw_filled_rectangle(730, 650, 890, 730, al_map_rgb(0, 0, 0));
 			//al_draw_filled_rectangle(700, 600, 890, 730, al_map_rgb(100, 0, 0));
@@ -163,22 +146,7 @@ int main(void)
 			
 		}
 		al_flip_display();
-		//al_flip_display();
-		//if (turn == 1) {
-		//	system("timeout /t 5 /nobreak");
-		//}
-		//if (remaining == 0){
-		//	al_draw_filled_rectangle(725, 650, 890, 730, al_map_rgb(100, 100, 0));
-		//	al_draw_text(font, al_map_rgb(255, 255, 255), 730, 650, ALLEGRO_ALIGN_LEFT, "Play Again? (y/n)");
-		//	if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
-		//		if (ev.keyboard.keycode == ALLEGRO_KEY_Y) {
-		//			al_clear_to_color(al_map_rgb(0, 0, 0));
-		//		}
-		//		if (ev.keyboard.keycode == ALLEGRO_KEY_N) {
-		//			done=true;
-		//		}
-		//	}
-		//}
+
 	}
 	al_rest(5.0);
 	al_destroy_font(font);
@@ -218,15 +186,6 @@ void draw_status(ALLEGRO_FONT* font, int matched, int remaining) {
 	
 }
 
-
-//void draw_x(int x, int y)
-//{
-//	al_draw_pieslice(x, y, 30, 90, 30, al_map_rgb(50, 223, 0), 4);
-//}
-//void draw_o(int x, int y)
-//{
-//	al_draw_rounded_rectangle(x - 20, y - 20, x + 20, y + 20, 5, 5, al_map_rgb(255, 0, 0), 4);
-//}
 
 
 
@@ -285,34 +244,6 @@ void draw_objects(int x, int y, std::string shape) {
 }
 
 
-//void select_card(int x, int y, int& turn, int boardx, int boardy, game_logic& game)
-//{
-//	ALLEGRO_FONT* font = al_load_font("college.ttf", 24, 0);
-//	if (turn == 0)
-//	{
-//		//if (game.set_x(boardx, boardy) == true)
-//		//{
-//		//	draw_x(x, y);
-//		//	turn = 1;
-//		//}
-//
-//		//if (game.select_card(boardx, boardy) == true) {
-//		//	draw_shape(x, y);
-//		//	turn = 1; //choose another card
-//		//	//Reveal card
-//		//}
-//
-//	}
-//	else
-//	{
-//		//if (game.select_card(boardx, boardy) == true)
-//		//{
-//		//	draw_shape(x, y);
-//		//	turn = 0;
-//		//	//Compare card
-//		//}
-//	}
-//}
 
 void set_graphics_x_o(int x, int y, game_logic& game, int& turn, int& matched, int& remaining)
 {
@@ -545,34 +476,4 @@ void set_graphics_x_o(int x, int y, game_logic& game, int& turn, int& matched, i
 
 	game.checkShapes(shape, turn, x_shape, y_shape, matched, remaining);
 }
-
-void game_message(bool& gameover, game_logic& game)
-{
-	bool xwon = false, owon = false, tie = false;
-	game.done(tie, xwon, owon);
-	ALLEGRO_FONT* font = al_load_font("college.ttf", 24, 0);
-
-	if (tie == true)
-	{
-		al_draw_text(font, al_map_rgb(255, 255, 255), 1, 400, ALLEGRO_ALIGN_LEFT, "The game is a tie -- screen will close shortly");
-		gameover = true;
-	}
-	else if (xwon == true)
-	{
-		al_draw_text(font, al_map_rgb(255, 255, 255), 1, 400, ALLEGRO_ALIGN_LEFT, "X won the game-- screen will close shortly");
-		gameover = true;
-	}
-	else if (owon == true)
-	{
-		al_draw_text(font, al_map_rgb(255, 255, 255), 1, 400, ALLEGRO_ALIGN_LEFT, "O won the game-- screen will close shortly");
-		gameover = true;
-	}
-	//else {
-	//	al_draw_text(font, al_map_rgb(255, 255, 255), 920, 520, ALLEGRO_ALIGN_LEFT, "Matched:\n");
-	//	al_draw_text(font, al_map_rgb(255, 255, 255), 920, 550, ALLEGRO_ALIGN_LEFT, "Remaining:\n");
-	//}
-	al_destroy_font(font);
-
-}
-
 

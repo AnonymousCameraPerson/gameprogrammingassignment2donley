@@ -4,10 +4,6 @@
 class game_logic
 {
 public:
-	void setup();
-	bool set_x(int x, int y);
-	bool set_o(int x, int y);
-	void done(bool& tie, bool& xwon, bool& owon);
 	std::string select_card(int row, int col);
 	void checkShapes(std::string shape, int& turn, int x, int y, int& matched, int& remaining);
 	void random_create();
