@@ -108,7 +108,7 @@ int main(void)
 	//game.setup();
 	draw_grid();
 	game.random_create();
-	draw_status(font, matched, remaining);
+	//draw_status(font, matched, remaining);
 	//game_message(gameover, game);
 
 	al_flip_display();
@@ -135,13 +135,16 @@ int main(void)
 		draw_grid();
 		draw_status(font, matched, remaining);
 		game_message(gameover, game);
-		if (remaining == 2) {
+		if (remaining == 0) {
 			al_draw_filled_rectangle(730, 650, 890, 730, al_map_rgb(0, 0, 0));
 			//al_draw_filled_rectangle(700, 600, 890, 730, al_map_rgb(100, 0, 0));
 			al_draw_text(font, al_map_rgb(255, 255, 255), 740, 650, ALLEGRO_ALIGN_LEFT, "Play Again?");
 			al_draw_text(font, al_map_rgb(255, 255, 255), 740, 680, ALLEGRO_ALIGN_LEFT, "(y or n)");
 			if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
 				if (ev.keyboard.keycode == ALLEGRO_KEY_Y) {
+					matched = 0;
+					remaining = 12;
+					game.random_create();
 					al_clear_to_color(al_map_rgb(0, 0, 0));
 				}
 				if (ev.keyboard.keycode == ALLEGRO_KEY_N) {
